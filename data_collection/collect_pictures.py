@@ -1,4 +1,5 @@
 import os
+import json
 import praw
 from dotenv import load_dotenv
 
@@ -14,13 +15,13 @@ reddit = praw.Reddit(
         user_agent=os.getenv("USER_AGENT")
         )
 
-memes = reddit.subreddit('memes').hot(limit=None)
-meme_urls = []
-for meme in memes:
-    meme_urls.append(meme.url)
+pics = reddit.subreddit('pics').hot(limit=None)
+pic_urls = []
+for pic in pics:
+    pic_urls.append(pic.url)
 
-with open(cwd + "/data_raw/meme_urls.txt", "w+") as f:
+with open(cwd + "/data_raw/picture_urls.txt", "w+") as f:
     f.seek(0)
-    for url in meme_urls:
+    for url in pic_urls:
         f.write(url + "\n")
     f.truncate()
